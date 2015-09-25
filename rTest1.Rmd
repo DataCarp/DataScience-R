@@ -1,0 +1,67 @@
+---
+title: "R-Test1"
+date: "Sunday, July 12, 2015"
+output: html_document
+---
+
+Assignment
+----------------------------------------------------------------------------
+
+"R has built in functions for choose() and factorial(). Your task is to write your own variation of the choose()function, that does not use either of these functions"
+
+
+There were two parts to this assignment
+- Create our own factorial and choose code
+- Create a function that takes user input and run it through the function
+
+**Part 1**
+Since we were not allowed to use factorial, my version of factorial is as such:
+
+```{r}
+a <-1
+
+for(i in 1:12){
+  a = a * i
+}
+print(a)
+```
+
+
+**Part 2**
+My version of the choose and factorial code, combined into a single function:
+```{r, echo=FALSE}
+calculate.choose <- function (val1, val2){
+
+n <-1
+r <-1
+d <-1
+difference = val1 - val2
+
+for(i in 1:val1){
+  n = n * i
+
+}
+
+for(j in 1:val2){
+	r = r * j
+
+}
+
+for(k in 1:difference){
+	d = d * k
+
+}
+
+final <- n/(d * r)
+print(final)
+
+}
+```
+
+I can validate this code works, by passing in the values from the homework example. I used 5 as r, and 3 as n. The answers is found below:
+
+```{r}
+calculate.choose(5, 3)
+```
+
+

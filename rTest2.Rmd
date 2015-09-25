@@ -1,0 +1,79 @@
+---
+title: "R-Test2"
+date: "Sunday, July 19, 2015"
+output: html_document
+---
+
+ssignment
+----------------------------------------------------------------------------
+
+"You should take the data, and create a data frame with a subset of the columns
+(and if you like rows) in the dataset. You should include the column that indicates edible or poisonous and three or
+four other columns. You should also add meaningful column names and replace the abbreviations used in the
+data—for example, in the appropriate column, “e” might become “edible.” Your deliverable is the R code to
+perform these transformation tasks"
+
+
+
+
+**Part 1**
+Create a variable to read the file, and assign column headers
+
+```{r}
+
+shrooms <- read.delim("agaricus-lepiota.csv",header = FALSE, sep = ",")
+colnames(shrooms) = c("classDistribution","capShape","capSurface","capColor", "bruises", "odor","gillAttachment","gillSpacing", "gillSize", "gillColor", "stalkShape","stalkRoot","stalkSurfaceAboveRing", "stalkSurfaceBelowRing","stalkColorAboveRing","stalkColorBelowRing","veilType","veilColor","ringNumber","ringType","sporePrintColor","population","habitat")
+```
+
+
+**Part 2**
+Load the PLYR package to speed up data manipulation, using the revalue function
+```{r, echo=FALSE}
+library(plyr)
+```
+
+**Part 3**
+Replace abbreviated values, based on a match, with more readable names
+
+```{r}
+shrooms$classDistribution <-revalue(shrooms$classDistribution, c("p" = "poisonous", "e" = "edible"))
+shrooms$capShape <-revalue(shrooms$capShape, c("b" = "bell",
+"c" = "conical",
+"x" = "convex",
+"f" = "flat",
+"s" = "sunken",
+"k" ="knobbed"
+))
+shrooms$capSurface <-revalue(shrooms$capSurface, c("f" = "fibrous",
+"g" = "grooves",
+"y" = "scaly",
+"s" = "smooth"))
+shrooms$capColor <-revalue(shrooms$capColor, c("n" = "brown",
+"b" = "buff",
+"c" = "cinnamon",
+"g" = "gray",
+"r" = "green",
+"u" = "purple",
+"e" = "red",
+"w" = "white",
+"y" = "yellow",
+"p" = "pink"))
+shrooms$bruises <-revalue(shrooms$bruises, c("t" = "bruises",
+"f" = "noBruises"))
+shrooms$odor <-revalue(shrooms$odor, c("a" = "almond",
+"l" = "anise",
+"c" = "creosote",
+"y" = "fishy",
+"f" = "foul",
+"m" = "musty",
+"n" = "none",
+"p" = "pungent",
+"s" = "spicy"))
+```
+
+**Part 4**
+
+Display 5 columns of data, and some rows
+```{r}
+shrooms[1:5,1:5]
+```

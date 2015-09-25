@@ -1,0 +1,56 @@
+---
+title: "R-Test3"
+date: "Saturday, July 25, 2015"
+output: html_document
+---
+
+Assignment
+----------------------------------------------------------------------------
+
+"Choose an interesting dataset and use R graphics to describe thdata. You may
+use base R graphics, or a graphics package of your choice. You should include at least one example of each of the
+following:
+.  histogram
+.  boxplot
+.  scatterplot
+Do the graphics provide insight into any relationships in the data?"
+
+**Answer**
+Yes, the graphics do provide insight, and show the relationship between complaints and total number of officers involved. As seen in the scatterplot, the largest
+grouping of complaints occurred when there were around 2000 total officers involved. Bronx patrol group had the highest number of complaints, while the "other patrol services"
+and "special operations division" had the fewest complaints.
+
+**Load data and required Packages**
+```{r}
+#install.packages("ggplot2")
+#install.packages("RColorBrewer")
+require(ggplot2)
+complaints <- read.csv(url("http://data.cityofnewyork.us/api/views/js82-9nvz/rows.csv?accessType=DOWNLOAD"))
+```
+
+**Histogram**
+
+```{r}
+ggplot(data = complaints) + geom_histogram(aes(x=Complaints.Count))
+```
+
+**Boxplot**
+
+```{r}
+boxplot(complaints$Number.Of.Subject.Officers)
+```
+
+**Scatterplot**
+This scatterplot shows the total number of complaints over the time frame of the data ()
+
+```{r}
+plot(complaints$Complaints.Count ~ complaints$Number.Of.Subject.Officers)
+```
+
+**Enhanced Scatterplot**
+This enahnced Scatterplot adds color, a legend, and facets to the mix. It is more helpful is showing a relationship to the data, as it breaks down
+the complaints per officer, per department year over year.
+
+```{r}
+qplot(Number.Of.Subject.Officers,Complaints.Count, data = complaints, color = Precinct...Command, facets = Year ~.)
+```
